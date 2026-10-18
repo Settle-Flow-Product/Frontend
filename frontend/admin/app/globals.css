@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/**
+ * The shadcn/ui token contract, plus the semantic payment states from the deck (chapter 25.1).
+ *
+ * The admin console runs DARK by default. It is looked at for hours, often on a second screen
+ * beside a terminal, and the website's paper-white is wrong for that. The tokens are the same
+ * contract either way, so a component moved between the two apps does not need touching.
+ *
+ * Two families of colour, deliberately kept apart:
+ *
+ *   - the shadcn tokens (background, foreground, primary, border, ring …) style the furniture;
+ *   - --ok / --warn / --err / --info carry MEANING, and each keeps one meaning throughout:
+ *     amber is "waiting", blue is "in progress", green is "done", red is "stopped".
+ *
+ * Colour is never the only carrier. Every status pill also states its word — required for
+ * colour-blind readers, and it survives being screenshotted into a submission form.
+ */
+
+:root {
+  --radius: 0.5rem;
+
+  --background: oklch(0.16 0.012 264);
+  --foreground: oklch(0.93 0.006 264);
+
+  --card: oklch(0.2 0.014 264);
+  --card-foreground: oklch(0.93 0.006 264);
+
+  --popover: oklch(0.2 0.014 264);
+  --popover-foreground: oklch(0.93 0.006 264);
+
+  --primary: oklch(0.93 0.006 264);
+  --primary-foreground: oklch(0.2 0.014 264);
+
+  --secondary: oklch(0.26 0.015 264);
+  --secondary-foreground: oklch(0.93 0.006 264);
+
+  --muted: oklch(0.26 0.015 264);
+  --muted-foreground: oklch(0.68 0.015 264);
+
+  --accent: oklch(0.26 0.015 264);
+  --accent-foreground: oklch(0.93 0.006 264);
+
+  --destructive: oklch(0.55 0.17 22);
+  --destructive-foreground: oklch(0.97 0.005 264);
+
+  --border: oklch(0.29 0.015 264);
+  --input: oklch(0.29 0.015 264);
+  --ring: oklch(0.6 0.12 250);
+
+  --ok: oklch(0.68 0.15 155);
+  --ok-foreground: oklch(0.86 0.09 155);
+  --ok-bg: oklch(0.26 0.05 155);
+
+  --warn: oklch(0.76 0.13 82);
+  --warn-foreground: oklch(0.88 0.09 82);
+  --warn-bg: oklch(0.28 0.05 82);
+
+  --err: oklch(0.62 0.18 20);
+  --err-foreground: oklch(0.86 0.1 20);
+  --err-bg: oklch(0.27 0.06 20);
+
+  --info: oklch(0.66 0.13 253);
+  --info-foreground: oklch(0.86 0.08 253);
+  --info-bg: oklch(0.26 0.05 253);
+}
+
+/* Available for anyone who prefers it; the console does not ship a toggle. */
+.light {
+  --background: oklch(0.16 0.012 264);
+  --foreground: oklch(0.24 0.03 264);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.03 264);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.03 264);
+
+  --primary: oklch(0.24 0.03 264);
+  --primary-foreground: oklch(0.99 0.002 265);
+
+  --secondary: oklch(0.968 0.005 265);
+  --secondary-foreground: oklch(0.24 0.03 264);
+
+  --muted: oklch(0.968 0.005 265);
+  --muted-foreground: oklch(0.56 0.02 264);
+
+  --accent: oklch(0.968 0.005 265);
+  --accent-foreground: oklch(0.24 0.03 264);
+
+  --destructive: oklch(0.62 0.19 22);
+  --destructive-foreground: oklch(0.99 0.002 265);
+
+  --border: oklch(0.918 0.008 265);
+  --input: oklch(0.918 0.008 265);
+  --ring: oklch(0.68 0.13 250);
+
+  /* Payment state. Deck chapter 25.1. */
+  --ok: oklch(0.72 0.16 155);
+  --ok-foreground: oklch(0.36 0.09 155);
+  --ok-bg: oklch(0.96 0.03 155);
+
+  --warn: oklch(0.79 0.14 82);
+  --warn-foreground: oklch(0.45 0.1 82);
+  --warn-bg: oklch(0.97 0.04 82);
+
+  --err: oklch(0.64 0.19 20);
+  --err-foreground: oklch(0.44 0.16 20);
+  --err-bg: oklch(0.96 0.03 20);
+
+  --info: oklch(0.68 0.14 253);
+  --info-foreground: oklch(0.42 0.13 253);
+  --info-bg: oklch(0.96 0.03 253);
+}
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ok: var(--ok);
+  --color-ok-foreground: var(--ok-foreground);
+  --color-ok-bg: var(--ok-bg);
+  --color-warn: var(--warn);
+  --color-warn-foreground: var(--warn-foreground);
+  --color-warn-bg: var(--warn-bg);
+  --color-err: var(--err);
+  --color-err-foreground: var(--err-foreground);
+  --color-err-bg: var(--err-bg);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-bg: var(--info-bg);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Money columns line up, or they are not read. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
